@@ -7,8 +7,7 @@
 <title>Jorge Nobre | Full Stack, Linux and DevOps</title>
 <meta name="description" content="Jorge Nobre is a Full Stack developer, Linux sysadmin and DevOps engineer from São Paulo, Brazil.">
 <style>
-  /* Monaspace Neon: download it from github.com/githubnext/monaspace and place the
-     file at fonts/MonaspaceNeon-Regular.woff2 (see the note in the chat). */
+  /* Monaspace Neon: put MonaspaceNeon-Regular.woff2 in a "fonts" folder next to this file. */
   @font-face {
     font-family: "Monaspace Neon";
     font-weight: 400;
@@ -27,82 +26,104 @@
     --mono: "Monaspace Neon", ui-monospace, "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--mono);
-    font-weight: 400;
-    font-size: 0.95rem;
-    line-height: 1.75;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--mono); font-weight: 400; font-size: 0.95rem; line-height: 1.75;
   }
   a { color: var(--accent); text-underline-offset: 4px; text-decoration-thickness: 1px; }
   a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
   h1, h2, h3, p, ul { margin: 0; }
   ul { padding: 0; list-style: none; }
 
-  .layout { max-width: 70rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  /* Scroll progress */
+  .progress { position: fixed; inset: 0 0 auto 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; z-index: 20; }
+  .layout, footer { position: relative; z-index: 1; }
+
+  .layout { max-width: 70rem; margin: 0 auto; padding: 3rem 1.5rem 2rem; }
 
   /* Sidebar */
   .side h1 { font-size: 2.1rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 400; }
+  .side h1 .ch { display: inline-block; }
   .role { margin-top: 0.75rem; color: var(--muted); }
   .status {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    margin-top: 1.5rem; padding: 0.4rem 0.8rem;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
-    font-size: 0.85rem;
+    display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; padding: 0.4rem 0.8rem;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem;
   }
-  .status::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); }
+  .status::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(232,184,109,.55); } 70%,100% { box-shadow: 0 0 0 9px rgba(232,184,109,0); } }
   .side nav { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.35rem; }
-  .side nav a { color: var(--muted); text-decoration: none; width: fit-content; }
+  .side nav a { color: var(--muted); text-decoration: none; width: fit-content; padding-left: 0; transition: color .2s, padding-left .25s; }
   .side nav a:hover { color: var(--ink); }
+  .side nav a.active { color: var(--accent); padding-left: 0.9rem; }
   .links { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 
   /* Content */
   main section { padding: 2.75rem 0; border-top: 1px solid var(--line); }
-  main section:first-child { border-top: 0; padding-top: 2rem; }
+  main section.hero { border-top: 0; padding: 0 0 1.5rem; }
   h2 { font-size: 1.2rem; font-weight: 400; color: var(--accent); margin-bottom: 1.25rem; }
-  main p + p { margin-top: 1rem; }
   main p { max-width: 62ch; }
-  .lead { font-size: 1.15rem; line-height: 1.7; }
+  main p + p { margin-top: 1rem; }
+  .hero .lead { font-size: clamp(1.5rem, 3.6vw, 2.3rem); line-height: 1.35; letter-spacing: -0.02em; max-width: 26ch; text-wrap: balance; }
+  .lead .w { display: inline-block; }
+  .hero .sub { margin-top: 1.5rem; color: var(--muted); }
 
-  .service { padding: 0.25rem 0 0.25rem 1.25rem; border-left: 2px solid var(--line); }
+  .service { padding: 0.25rem 0 0.25rem 1.25rem; border-left: 2px solid var(--line); transition: border-color .25s, transform .25s; }
+  .service:hover { border-color: var(--accent); transform: translateX(4px); }
   .service + .service { margin-top: 1.5rem; }
   .service h3 { font-size: 1rem; font-weight: 400; }
   .service p { color: var(--muted); margin-top: 0.25rem; }
   .service .tools { color: var(--ink); margin-top: 0.5rem; font-size: 0.88rem; }
 
-  .stack { display: grid; gap: 1.1rem; }
-  .stack dt { color: var(--muted); font-size: 0.85rem; }
-  .stack dd { margin: 0.15rem 0 0; }
-
   .cta {
     display: inline-block; margin-top: 1.5rem; padding: 0.7rem 1.25rem;
     background: var(--accent); color: #1d222c; text-decoration: none; border-radius: 6px;
+    transition: transform .2s, box-shadow .2s;
   }
-  .cta:hover { filter: brightness(1.08); }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,184,109,.25); }
 
-  footer { margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+  .mail { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-top: 1.25rem; }
+  .mail a { font-size: 1.05rem; }
+  .copy {
+    font: inherit; font-size: 0.82rem; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 6px; padding: 0.3rem 0.8rem; cursor: pointer;
+  }
+  .copy:hover { border-color: var(--accent); }
+  .other { margin-top: 1.25rem; color: var(--muted); }
+
+  footer { max-width: 70rem; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; color: var(--muted); font-size: 0.85rem; }
+  footer div { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+
+  /* Custom cursor (only enabled by JS on mouse devices) */
+  .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+  .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 50; border-radius: 50%; opacity: 0; }
+  .cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--accent); }
+  .cur-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1px solid var(--accent); }
 
   @media (min-width: 56rem) {
     .layout { display: grid; grid-template-columns: 17rem 1fr; gap: 5rem; padding-top: 5rem; }
     .side { position: sticky; top: 5rem; align-self: start; }
-    main section:first-child { padding-top: 0; }
+      }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .status::before { animation: none; }
   }
 </style>
 </head>
 <body>
-<div class="layout">
+<div class="progress" aria-hidden="true"></div>
+<div class="cur-dot" aria-hidden="true"></div>
+<div class="cur-ring" aria-hidden="true"></div>
 
+<div class="layout">
   <aside class="side">
-    <h1>Jorge Nobre</h1>
+    <h1 id="name">Jorge Nobre</h1>
     <p class="role">Full Stack developer<br>Linux sysadmin<br>DevOps engineer</p>
     <p class="status">Open to work</p>
     <nav aria-label="Sections">
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#stack">Stack</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -113,11 +134,16 @@
   </aside>
 
   <main>
+    <section class="hero">
+      <p class="lead" id="lead">I build web apps and the infrastructure they run on.</p>
+      <p class="sub">Automation and security come first, from the first commit to production.</p>
+    </section>
+
     <section id="about">
       <h2>About</h2>
-      <p class="lead">I build web applications and the infrastructure they run on, with a focus on automation and security.</p>
-      <p>I’m Jorge, 22, from São Paulo, Brazil. I started in Full Stack development and followed the stack all the way down: Linux servers, containers, cloud platforms and infrastructure as code.</p>
-      <p>Cybersecurity and low-level programming are the areas I’m most curious about, and they shape how I build everything else. I work as a freelancer and I’m open to full-time roles.</p>
+      <p>I’m Jorge, 22, from São Paulo, Brazil. I’ve been studying technology since I was 10, and I started professionally in Full Stack development before following the stack all the way down: Linux servers, containers, cloud platforms and infrastructure as code.</p>
+      <p>Cybersecurity and low-level programming are what I’m most curious about, and they shape how I build everything else.</p>
+      <p>I work as a freelancer and I’m open to full-time roles. I speak fluent English, so I’m comfortable working with international teams and clients.</p>
     </section>
 
     <section id="services">
@@ -135,18 +161,8 @@
       <div class="service">
         <h3>Linux and Unix administration</h3>
         <p>Server setup, storage management and system maintenance.</p>
-        <p class="tools">Linux, Unix, shell scripting</p>
+        <p class="tools">Linux, Unix, shell scripting, Python</p>
       </div>
-    </section>
-
-    <section id="stack">
-      <h2>Stack</h2>
-      <dl class="stack">
-        <div><dt>Languages and frameworks</dt><dd>Python, JavaScript, Django, Next.js, React, Node.js</dd></div>
-        <div><dt>Infrastructure and cloud</dt><dd>Docker, Kubernetes, Terraform, AWS, GCP, DigitalOcean, Linux</dd></div>
-        <div><dt>Data and platforms</dt><dd>Firebase</dd></div>
-        <div><dt>Interests</dt><dd>Cybersecurity, low-level programming</dd></div>
-      </dl>
     </section>
 
     <section id="projects">
@@ -157,17 +173,90 @@
 
     <section id="contact">
       <h2>Contact</h2>
-      <p>Have a project in mind or want to talk about a role? Send me a message.</p>
-      <p style="margin-top:1rem">
-        <a href="mailto:jorge.nobre.1994@proton.me">jorge.nobre.1994@proton.me</a><br>
-        <a href="https://www.linkedin.com/in/jorgenobre0x0/">linkedin.com/in/jorgenobre0x0</a><br>
-        <a href="https://github.com/j0rge-nobre">github.com/j0rge-nobre</a>
-      </p>
+      <p>Have a project in mind or a role to discuss? Email is the best way to reach me.</p>
+      <div class="mail">
+        <a href="mailto:jorge.nobre.1994@proton.me" id="mail">jorge.nobre.1994@proton.me</a>
+        <button class="copy" type="button" id="copy">Copy email</button>
+      </div>
+      <p class="other">You can also find me on <a href="https://www.linkedin.com/in/jorgenobre0x0/">LinkedIn</a>.</p>
     </section>
-
-    <footer>© 2026 Jorge Nobre</footer>
   </main>
-
 </div>
+
+<footer><div>© 2026 Jorge Nobre</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  // Copy email button
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function () {
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy email"; }, 1800); };
+    if (navigator.clipboard) { navigator.clipboard.writeText("jorge.nobre.1994@proton.me").then(done); }
+  });
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !window.gsap || !window.ScrollTrigger) return; // content stays visible without animation
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Split helpers
+  function split(el, by, cls) {
+    var text = el.textContent; el.setAttribute("aria-label", text); el.textContent = "";
+    var parts = by === "char" ? text.split("") : text.split(" ");
+    parts.forEach(function (p, i) {
+      var s = document.createElement("span"); s.className = cls; s.setAttribute("aria-hidden", "true");
+      s.textContent = p === " " ? "\u00a0" : p; el.appendChild(s);
+      if (by === "word" && i < parts.length - 1) el.appendChild(document.createTextNode(" "));
+    });
+    return el.querySelectorAll("." + cls);
+  }
+
+  // Page-load sequence (the one big moment)
+  var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  tl.from(split(document.getElementById("name"), "char", "ch"), { yPercent: 110, opacity: 0, duration: 0.7, stagger: 0.04 })
+    .from(".role, .status, .side nav, .links", { y: 14, opacity: 0, duration: 0.6, stagger: 0.12 }, "-=0.3")
+    .from(split(document.getElementById("lead"), "word", "w"), { y: 40, opacity: 0, duration: 0.8, stagger: 0.07 }, "-=1.1")
+    .from(".hero .sub", { y: 16, opacity: 0, duration: 0.6 }, "-=0.4");
+
+  // Scroll progress bar
+  gsap.to(".progress", { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: 0.2 } });
+
+  // Section reveals
+  gsap.utils.toArray("main section:not(.hero)").forEach(function (sec) {
+    gsap.from(sec.querySelectorAll("h2, p, .service, .cta, .mail"), {
+      y: 28, opacity: 0, duration: 0.7, ease: "power3.out", stagger: 0.1,
+      scrollTrigger: { trigger: sec, start: "top 82%", once: true }
+    });
+  });
+
+  // Active menu link follows the scroll
+  var links = document.querySelectorAll(".side nav a");
+  links.forEach(function (a) {
+    var sec = document.querySelector(a.getAttribute("href"));
+    ScrollTrigger.create({
+      trigger: sec, start: "top 45%", end: "bottom 45%",
+      onToggle: function (self) { if (self.isActive) { links.forEach(function (l) { l.classList.remove("active"); }); a.classList.add("active"); } }
+    });
+  });
+
+  // Custom cursor: dot follows instantly, ring trails behind and grows over links
+  if (window.matchMedia("(pointer: fine)").matches) {
+    var dot = document.querySelector(".cur-dot"), ring = document.querySelector(".cur-ring");
+    var dx = gsap.quickTo(dot, "x", { duration: 0.05 }), dy = gsap.quickTo(dot, "y", { duration: 0.05 });
+    var rx = gsap.quickTo(ring, "x", { duration: 0.35, ease: "power3" }), ry = gsap.quickTo(ring, "y", { duration: 0.35, ease: "power3" });
+    window.addEventListener("mousemove", function (e) {
+      document.documentElement.classList.add("has-cursor");
+      gsap.to([dot, ring], { opacity: 1, duration: 0.3, overwrite: "auto" });
+      dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY);
+    });
+    document.addEventListener("mouseleave", function () { gsap.to([dot, ring], { opacity: 0, duration: 0.2 }); });
+    document.querySelectorAll("a, button").forEach(function (el) {
+      el.addEventListener("mouseenter", function () { gsap.to(ring, { scale: 1.7, duration: 0.25 }); gsap.to(dot, { scale: 0.5, duration: 0.25 }); });
+      el.addEventListener("mouseleave", function () { gsap.to(ring, { scale: 1, duration: 0.25 }); gsap.to(dot, { scale: 1, duration: 0.25 }); });
+    });
+  }
+})();
+</script>
 </body>
 </html>
