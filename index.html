@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Jorge Nobre | Full Stack, Linux and DevOps</title>
+<meta name="description" content="Jorge Nobre is a Full Stack developer, Linux sysadmin and DevOps engineer from São Paulo, Brazil.">
+<style>
+  /* Monaspace Neon: download it from github.com/githubnext/monaspace and place the
+     file at fonts/MonaspaceNeon-Regular.woff2 (see the note in the chat). */
+  @font-face {
+    font-family: "Monaspace Neon";
+    font-weight: 400;
+    font-display: swap;
+    src: local("Monaspace Neon"), local("MonaspaceNeon-Regular"),
+         url("fonts/MonaspaceNeon-Regular.woff2") format("woff2");
+  }
+  :root {
+    color-scheme: dark;
+    --bg: #1d222c;
+    --panel: #242a36;
+    --ink: #dde2ec;
+    --muted: #98a2b5;
+    --line: #333b4b;
+    --accent: #e8b86d;
+    --mono: "Monaspace Neon", ui-monospace, "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  a { color: var(--accent); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  h1, h2, h3, p, ul { margin: 0; }
+  ul { padding: 0; list-style: none; }
+
+  .layout { max-width: 70rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+
+  /* Sidebar */
+  .side h1 { font-size: 2.1rem; line-height: 1.15; letter-spacing: -0.02em; font-weight: 400; }
+  .role { margin-top: 0.75rem; color: var(--muted); }
+  .status {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    margin-top: 1.5rem; padding: 0.4rem 0.8rem;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 999px;
+    font-size: 0.85rem;
+  }
+  .status::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); }
+  .side nav { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .side nav a { color: var(--muted); text-decoration: none; width: fit-content; }
+  .side nav a:hover { color: var(--ink); }
+  .links { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+
+  /* Content */
+  main section { padding: 2.75rem 0; border-top: 1px solid var(--line); }
+  main section:first-child { border-top: 0; padding-top: 2rem; }
+  h2 { font-size: 1.2rem; font-weight: 400; color: var(--accent); margin-bottom: 1.25rem; }
+  main p + p { margin-top: 1rem; }
+  main p { max-width: 62ch; }
+  .lead { font-size: 1.15rem; line-height: 1.7; }
+
+  .service { padding: 0.25rem 0 0.25rem 1.25rem; border-left: 2px solid var(--line); }
+  .service + .service { margin-top: 1.5rem; }
+  .service h3 { font-size: 1rem; font-weight: 400; }
+  .service p { color: var(--muted); margin-top: 0.25rem; }
+  .service .tools { color: var(--ink); margin-top: 0.5rem; font-size: 0.88rem; }
+
+  .stack { display: grid; gap: 1.1rem; }
+  .stack dt { color: var(--muted); font-size: 0.85rem; }
+  .stack dd { margin: 0.15rem 0 0; }
+
+  .cta {
+    display: inline-block; margin-top: 1.5rem; padding: 0.7rem 1.25rem;
+    background: var(--accent); color: #1d222c; text-decoration: none; border-radius: 6px;
+  }
+  .cta:hover { filter: brightness(1.08); }
+
+  footer { margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+  @media (min-width: 56rem) {
+    .layout { display: grid; grid-template-columns: 17rem 1fr; gap: 5rem; padding-top: 5rem; }
+    .side { position: sticky; top: 5rem; align-self: start; }
+    main section:first-child { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="side">
+    <h1>Jorge Nobre</h1>
+    <p class="role">Full Stack developer<br>Linux sysadmin<br>DevOps engineer</p>
+    <p class="status">Open to work</p>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="links">
+      <a href="https://github.com/j0rge-nobre">GitHub</a>
+      <a href="https://www.linkedin.com/in/jorgenobre0x0/">LinkedIn</a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p class="lead">I build web applications and the infrastructure they run on, with a focus on automation and security.</p>
+      <p>I’m Jorge, 22, from São Paulo, Brazil. I started in Full Stack development and followed the stack all the way down: Linux servers, containers, cloud platforms and infrastructure as code.</p>
+      <p>Cybersecurity and low-level programming are the areas I’m most curious about, and they shape how I build everything else. I work as a freelancer and I’m open to full-time roles.</p>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <div class="service">
+        <h3>Full Stack development</h3>
+        <p>Web applications from database to interface.</p>
+        <p class="tools">Django, Next.js, React, Node.js, Firebase</p>
+      </div>
+      <div class="service">
+        <h3>DevOps</h3>
+        <p>Infrastructure as code, containers and cloud deployments.</p>
+        <p class="tools">Docker, Terraform, Kubernetes, AWS, GCP, DigitalOcean</p>
+      </div>
+      <div class="service">
+        <h3>Linux and Unix administration</h3>
+        <p>Server setup, storage management and system maintenance.</p>
+        <p class="tools">Linux, Unix, shell scripting</p>
+      </div>
+    </section>
+
+    <section id="stack">
+      <h2>Stack</h2>
+      <dl class="stack">
+        <div><dt>Languages and frameworks</dt><dd>Python, JavaScript, Django, Next.js, React, Node.js</dd></div>
+        <div><dt>Infrastructure and cloud</dt><dd>Docker, Kubernetes, Terraform, AWS, GCP, DigitalOcean, Linux</dd></div>
+        <div><dt>Data and platforms</dt><dd>Firebase</dd></div>
+        <div><dt>Interests</dt><dd>Cybersecurity, low-level programming</dd></div>
+      </dl>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>My projects and experiments live on GitHub. Browse the repositories to see how I write and organize code.</p>
+      <a class="cta" href="https://github.com/j0rge-nobre">Visit my GitHub</a>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Have a project in mind or want to talk about a role? Send me a message.</p>
+      <p style="margin-top:1rem">
+        <a href="mailto:jorge.nobre.1994@proton.me">jorge.nobre.1994@proton.me</a><br>
+        <a href="https://www.linkedin.com/in/jorgenobre0x0/">linkedin.com/in/jorgenobre0x0</a><br>
+        <a href="https://github.com/j0rge-nobre">github.com/j0rge-nobre</a>
+      </p>
+    </section>
+
+    <footer>© 2026 Jorge Nobre</footer>
+  </main>
+
+</div>
+</body>
+</html>
